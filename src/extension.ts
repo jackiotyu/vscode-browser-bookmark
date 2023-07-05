@@ -21,7 +21,8 @@ export function activate(context: vscode.ExtensionContext) {
             let items: vscode.QuickPickItem[] = chromeBookmarkTree.chromePlugin.getBookmarks().map(item => {
                 return {
                     label: item.name || item.value,
-                    detail: item.value
+                    detail: item.value,
+                    description: "$(link)"
                 };
             });
 

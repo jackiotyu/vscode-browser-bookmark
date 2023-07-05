@@ -1,12 +1,20 @@
 {
+  "publisher": "jackiotyu",
   "name": "browser-bookmark",
-  "displayName": "browser-bookmark",
+  "displayName": "Browser Bookmark",
   "description": "esay use browser's bookmark",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.79.0"
   },
-  "icon": "images/icon.svg",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jackiotyu/vscode-browser-bookmark.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jackiotyu/vscode-browser-bookmark/issues"
+  },
   "categories": [
     "Other"
   ],
@@ -81,6 +89,11 @@
       ]
     }
   },
+  "keywords": [
+    "bookmark",
+    "chrome bookmark",
+    "browse bookmark"
+  ],
   "scripts": {
     "vscode:prepublish": "yarn run package",
     "compile": "webpack",
