@@ -31,7 +31,7 @@ export function activate(context: vscode.ExtensionContext) {
                 matchOnDetail: true,
                 placeHolder: "Please input keyword to filter bookmark",
                 canPickMany: false,
-                ignoreFocusOut: true,
+                ignoreFocusOut: false,
                 title: "Search bookmark",
             });
             if(!item) {return;}

@@ -3,7 +3,7 @@
   "name": "browser-bookmark",
   "displayName": "Browser Bookmark",
   "description": "esay use browser's bookmark",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.79.0"
   },
@@ -87,6 +87,12 @@
           "name": "chrome"
         }
       ]
+    },
+    "keybindings": {
+      "mac": "Cmd+Shift+v",
+      "win": "Ctrl+Shift+v",
+      "linux": "Ctrl+Shift+v",
+      "command": "browse-bookmark.search"
     }
   },
   "keywords": [
