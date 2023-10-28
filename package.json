@@ -38,7 +38,7 @@
       },
       {
         "command": "browser-bookmark.openInternal",
-        "title": "Open in builtin browser"
+        "title": "Open in built-in browser"
       },
       {
         "command": "browser-bookmark.openExternal",
@@ -50,9 +50,14 @@
         "icon": "$(refresh)"
       },
       {
-        "command": "browse-bookmark.search",
-        "title": "Search bookmark",
+        "command": "browser-bookmark.search",
+        "title": "Search Bookmark",
         "icon": "$(search)"
+      },
+      {
+        "command": "browser-bookmark.openSetting",
+        "title": "Open Setting",
+        "icon": "$(gear)"
       }
     ],
     "menus": {
@@ -74,12 +79,17 @@
         {
           "when": "view == chrome",
           "command": "browser-bookmark.refresh",
-          "group": "navigation"
+          "group": "navigation@1"
         },
         {
           "when": "view == chrome",
-          "command": "browse-bookmark.search",
-          "group": "navigation"
+          "command": "browser-bookmark.search",
+          "group": "navigation@2"
+        },
+        {
+          "when": "view == chrome",
+          "command": "browser-bookmark.openSetting",
+          "group": "navigation@100"
         }
       ],
       "commandPalette": [
@@ -122,7 +132,7 @@
       "mac": "Cmd+Shift+v",
       "win": "Ctrl+Shift+v",
       "linux": "Ctrl+Shift+v",
-      "command": "browse-bookmark.search"
+      "command": "browser-bookmark.search"
     },
     "configuration": {
       "browser-bookmark.defaultOpenWith": {

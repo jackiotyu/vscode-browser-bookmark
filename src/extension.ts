@@ -63,6 +63,9 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand(Commands.openExternal, async (item: BookmarkItem) => {
            item && openExternal(item.url);
         }),
+        vscode.commands.registerCommand(Commands.openSetting, () => {
+            void vscode.commands.executeCommand('workbench.action.openSettings', `@ext:jackiotyu.browser-bookmark`);
+        })
     );
 }
 

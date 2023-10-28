@@ -1,8 +1,9 @@
 export enum Commands {
-    openLink = 'browse-bookmark.open',
+    openLink = 'browser-bookmark.open',
     copyLink = 'browser-bookmark.copyLink',
     refresh = 'browser-bookmark.refresh',
-    search = 'browse-bookmark.search',
+    search = 'browser-bookmark.search',
     openInternal = 'browser-bookmark.openInternal',
     openExternal = 'browser-bookmark.openExternal',
+    openSetting = 'browser-bookmark.openSetting',
 }
