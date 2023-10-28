@@ -135,15 +135,24 @@
       "command": "browser-bookmark.search"
     },
     "configuration": {
-      "browser-bookmark.defaultOpenWith": {
-        "scope": "application",
-        "enum": ["internal", "external"],
-        "enumDescriptions": [
-          "open in internal \"Simple Browser\"",
-          "open bookmark in external browser"
-        ],
-        "default": "external",
-        "description": "Set \"external\" to open bookmark in external browser, or \"internal\" to open in internal \"Simple Browser\""
+      "title": "browser-bookmark",
+      "properties": {
+        "browser-bookmark.defaultOpenWith": {
+          "scope": "application",
+          "enum": ["internal", "external"],
+          "enumDescriptions": [
+            "open in internal \"Simple Browser\"",
+            "open bookmark in external browser"
+          ],
+          "default": "external",
+          "description": "Set \"external\" to open bookmark in external browser, or \"internal\" to open in internal browser"
+        },
+        "browser-bookmark.internalBrowserOpenCommand": {
+          "scope": "application",
+          "type": "string",
+          "default": "simpleBrowser.api.open",
+          "description": "Configure command for open internal browser, default is \"simpleBrowser.api.open\". Make sure it works!"
+        }
       }
     }
   },

@@ -15,10 +15,15 @@
 ```json
 {
     // Set "external" to open bookmark in external browser,
-    // or "internal" to open in internal `Simple Browser`
+    // or "internal" to open in internal browser
     // while click the "Browser Bookmark" tree item
     // and the quick item in "Search Bookmark".
     "browser-bookmark.defaultOpenWith": "external", // or "internal"
+
+    // Configure command for open internal browser
+    // If you prefer other extension, such as "Browse Lite",
+    // Set it to "browse-lite.open" to open through "Browse Lite".
+    "browser-bookmark.internalBrowserOpenCommand": "simpleBrowser.api.open",
 }
 ```
 

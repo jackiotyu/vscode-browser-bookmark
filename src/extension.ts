@@ -6,8 +6,12 @@ export function activate(context: vscode.ExtensionContext) {
     const chromeBookmarkTree = new ChromeBookmarkTree(context);
 
     const openExternal = (url: string) => chromeBookmarkTree.chromePlugin.open(url);
-    const openInternal = (url: string) =>
-        vscode.commands.executeCommand('simpleBrowser.api.open', vscode.Uri.parse(url));
+    const openInternal = (url: string) => {
+        const openCmd = vscode.workspace
+        .getConfiguration('browser-bookmark')
+        .get<string>('internalBrowserOpenCommand', 'simpleBrowser.api.open');
+        vscode.commands.executeCommand(openCmd, vscode.Uri.parse(url));
+    };
 
     const autoOpenUrl = (url: string) => {
         let defaultOpenWith = vscode.workspace
