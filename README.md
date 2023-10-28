@@ -2,6 +2,8 @@
 
 **Quick open url through chrome's bookmark**
 
+![Preview](https://cdn.jsdelivr.net/gh/jackiotyu/vscode-browser-bookmark@0.0.2/images/preview.png)
+
 ### Usage
 
 1. Open search.
@@ -26,5 +28,3 @@
     "browser-bookmark.internalBrowserOpenCommand": "simpleBrowser.api.open",
 }
 ```
-
-![Preview](https://cdn.jsdelivr.net/gh/jackiotyu/vscode-browser-bookmark@0.0.2/images/preview.png)

@@ -1,9 +1,6 @@
-# Change Log
+## [0.0.4] - 2023-10-28
 
-All notable changes to the "browser-bookmark" extension will be documented in this file.
+### Added
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
+- Add setting `browser-bookmark.defaultOpenWith`.
+- Add setting `browser-bookmark.internalBrowserOpenCommand`.
