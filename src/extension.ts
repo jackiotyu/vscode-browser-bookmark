@@ -20,8 +20,11 @@ export function activate(context: vscode.ExtensionContext) {
         if (defaultOpenWith === 'external') openExternal(url);
         else openInternal(url);
     };
-
-    context.subscriptions.push(vscode.window.registerTreeDataProvider(ChromeBookmarkTree.id, chromeBookmarkTree));
+    const chromeTree = vscode.window.createTreeView(ChromeBookmarkTree.id, {
+        treeDataProvider: chromeBookmarkTree,
+        showCollapseAll: true,
+    });
+    context.subscriptions.push(chromeTree);
     context.subscriptions.push(refreshChromeEvent);
     context.subscriptions.push(
         vscode.commands.registerCommand(Commands.openLink, (url: string, type: 'chrome') => {

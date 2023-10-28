@@ -11,7 +11,7 @@ export class BookmarkItem extends vscode.TreeItem {
     constructor(label: string, collapsible: vscode.TreeItemCollapsibleState, url: string) {
         super(label || url, collapsible);
         this.url = url;
-        this.iconPath = new vscode.ThemeIcon('link-external', new vscode.ThemeColor('charts.lines'));
+        this.iconPath = new vscode.ThemeIcon('tag', new vscode.ThemeColor('charts.lines'));
         this.tooltip = new vscode.MarkdownString(``);
         this.tooltip.appendMarkdown(`- name: ${label || url}\n`);
         this.tooltip.appendMarkdown(`- url: ${url}`);
