@@ -141,7 +141,7 @@
           "scope": "application",
           "enum": ["internal", "external"],
           "enumDescriptions": [
-            "open in internal \"Simple Browser\"",
+            "open in internal Browser",
             "open bookmark in external browser"
           ],
           "default": "external",

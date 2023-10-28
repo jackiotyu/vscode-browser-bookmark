@@ -17,6 +17,11 @@ export type NestChildren = Array<NestChildren> & {
     type: 'url' | 'folder'
 };
 
+export interface Bookmark {
+  name: string;
+  value: string;
+}
+
 class ChromePlugin {
 
   /**
@@ -50,7 +55,7 @@ class ChromePlugin {
     }) as NestChildren;
   }
 
-  getBookmarks (profile: string = 'Default') {
+  getBookmarks (profile: string = 'Default'): Bookmark[] {
     // Yes we can use synchronous code here because the file needs to be loaded before something will happen anyways
     let data;
     try {

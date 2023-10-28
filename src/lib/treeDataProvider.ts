@@ -12,9 +12,9 @@ export class BookmarkItem extends vscode.TreeItem {
         super(label || url, collapsible);
         this.url = url;
         this.iconPath = new vscode.ThemeIcon('tag', new vscode.ThemeColor('charts.lines'));
-        this.tooltip = new vscode.MarkdownString(``);
-        this.tooltip.appendMarkdown(`- name: ${label || url}\n`);
-        this.tooltip.appendMarkdown(`- url: ${url}`);
+        this.tooltip = new vscode.MarkdownString(``, true);
+        this.tooltip.appendMarkdown(`$(tag) ${label || url}\n\n`);
+        this.tooltip.appendMarkdown(`$(link) ${url}\n\n`);
         this.description = `${url}`;
         this.contextValue = 'browser-bookmark.url';
         this.command = {
