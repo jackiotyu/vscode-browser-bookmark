@@ -46,9 +46,7 @@ export class ChromeBookmarkTree implements vscode.TreeDataProvider<ChromeBookmar
     list: NestChildren[] = [];
     constructor(context: vscode.ExtensionContext) {
         this.refresh();
-        context.subscriptions.push(
-            refreshChromeEvent.event(this.refresh.bind(this))
-        );
+        context.subscriptions.push(refreshChromeEvent.event(this.refresh.bind(this)));
     }
     refresh() {
         this.list = this.chromePlugin.getBookmarkTree('Default');
@@ -57,14 +55,23 @@ export class ChromeBookmarkTree implements vscode.TreeDataProvider<ChromeBookmar
     getChildren(element?: ChromeBookmarkTreeItem | undefined): vscode.ProviderResult<ChromeBookmarkTreeItem[]> {
         if (!element) {
             return this.list.map(
-                (item) => new BookmarkFolder(item.name, vscode.TreeItemCollapsibleState.Collapsed, item.children),
+                (item) =>
+                    new BookmarkFolder(
+                        `${item.name} (${item.children.length})`,
+                        vscode.TreeItemCollapsibleState.Collapsed,
+                        item.children,
+                    ),
             );
         }
 
         if (element.type === 'folder') {
             return element.children.map((item) => {
                 if (item.type === 'folder') {
-                    return new BookmarkFolder(item.name, vscode.TreeItemCollapsibleState.Collapsed, item.children);
+                    return new BookmarkFolder(
+                        `${item.name} (${item.children.length})`,
+                        vscode.TreeItemCollapsibleState.Collapsed,
+                        item.children,
+                    );
                 }
                 return new BookmarkItem(item.name, vscode.TreeItemCollapsibleState.None, item.url);
             });
