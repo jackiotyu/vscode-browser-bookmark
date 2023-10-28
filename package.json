@@ -18,6 +18,12 @@
   "categories": [
     "Other"
   ],
+  "keywords": [
+    "bookmark",
+    "chrome bookmark",
+    "browse bookmark",
+    "open bookmark"
+  ],
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
@@ -29,6 +35,14 @@
       {
         "command": "browser-bookmark.copyLink",
         "title": "Copy Link"
+      },
+      {
+        "command": "browser-bookmark.openInternal",
+        "title": "Open in builtin browser"
+      },
+      {
+        "command": "browser-bookmark.openExternal",
+        "title": "Open in external browser"
       },
       {
         "command": "browser-bookmark.refresh",
@@ -46,6 +60,14 @@
         {
           "when": "view == chrome && viewItem == browser-bookmark.url",
           "command": "browser-bookmark.copyLink"
+        },
+        {
+          "when": "view == chrome && viewItem == browser-bookmark.url",
+          "command": "browser-bookmark.openInternal"
+        },
+        {
+          "when": "view == chrome && viewItem == browser-bookmark.url",
+          "command": "browser-bookmark.openExternal"
         }
       ],
       "view/title": [
@@ -68,6 +90,14 @@
         {
           "command": "browser-bookmark.copyLink",
           "when": "false"
+        },
+        {
+          "command": "browser-bookmark.openInternal",
+          "when": "false"
+        },
+        {
+          "command": "browser-bookmark.openExternal",
+          "when": "false"
         }
       ]
     },
@@ -76,7 +106,7 @@
         {
           "icon": "images/icon.svg",
           "id": "BrowserBookmark",
-          "title": "browser bookmark"
+          "title": "Browser Bookmark"
         }
       ]
     },
@@ -93,13 +123,20 @@
       "win": "Ctrl+Shift+v",
       "linux": "Ctrl+Shift+v",
       "command": "browse-bookmark.search"
+    },
+    "configuration": {
+      "browser-bookmark.defaultOpenWith": {
+        "scope": "application",
+        "enum": ["internal", "external"],
+        "enumDescriptions": [
+          "open in internal \"Simple Browser\"",
+          "open bookmark in external browser"
+        ],
+        "default": "external",
+        "description": "Set \"external\" to open bookmark in external browser, or \"internal\" to open in internal \"Simple Browser\""
+      }
     }
   },
-  "keywords": [
-    "bookmark",
-    "chrome bookmark",
-    "browse bookmark"
-  ],
   "scripts": {
     "vscode:prepublish": "yarn run package",
     "compile": "webpack",
