@@ -3,7 +3,7 @@
   "name": "browser-bookmark",
   "displayName": "Browser Bookmark",
   "description": "esay use browser's bookmark",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.79.0"
   },
