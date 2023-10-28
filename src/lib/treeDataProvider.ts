@@ -20,7 +20,7 @@ export class BookmarkItem extends vscode.TreeItem {
         this.command = {
             command: Commands.openLink,
             arguments: [url, 'chrome'],
-            title: 'open link',
+            title: vscode.l10n.t('Open Link'),
             tooltip: url,
         };
     }
@@ -39,7 +39,7 @@ class BookmarkFolder extends vscode.TreeItem {
 type ChromeBookmarkTreeItem = BookmarkFolder | BookmarkItem;
 
 export class ChromeBookmarkTree implements vscode.TreeDataProvider<ChromeBookmarkTreeItem> {
-    static readonly id = 'chrome';
+    static readonly id = 'BrowserBookmark.chrome';
     chromePlugin = ChromePlugin;
     _onDidChangeTreeData = chromeTreeEvent;
     onDidChangeTreeData: vscode.Event<void | ChromeBookmarkTreeItem> = chromeTreeEvent.event;

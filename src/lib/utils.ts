@@ -13,3 +13,7 @@ export const openInternal = (url: string) => {
         .get<string>('internalBrowserOpenCommand', 'simpleBrowser.api.open');
     vscode.commands.executeCommand(openCmd, vscode.Uri.parse(url));
 };
+
+export const openSetting = () => {
+    void vscode.commands.executeCommand('workbench.action.openSettings', `@ext:jackiotyu.browser-bookmark`);
+};

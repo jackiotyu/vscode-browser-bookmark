@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
-import { checkUseExternal } from './utils';
+import { checkUseExternal, openSetting } from './utils';
 import { Bookmark } from './chromePlugin';
-import { Commands } from '../constants';
 
 interface BookmarkPickItem extends vscode.QuickPickItem {
     url: string;
@@ -23,8 +22,11 @@ export const pickBookmark = (bookmarkList: Bookmark[]): Promise<BookmarkPickItem
             };
         });
 
-        quickPick.title = 'Search Bookmark';
-        quickPick.placeholder = `Click to open in ${checkUseExternal() ? 'external' : 'internal'} browser`;
+        quickPick.title = vscode.l10n.t('Search Bookmark');
+        quickPick.placeholder = vscode.l10n.t(
+            'Click to open in {0} browser',
+            checkUseExternal() ? vscode.l10n.t('external') : vscode.l10n.t('internal'),
+        );
         quickPick.items = items;
         quickPick.ignoreFocusOut = false;
         quickPick.canSelectMany = false;
@@ -33,13 +35,13 @@ export const pickBookmark = (bookmarkList: Bookmark[]): Promise<BookmarkPickItem
         quickPick.buttons = [
             {
                 iconPath: new vscode.ThemeIcon('gear'),
-                tooltip: 'Open Setting',
-                type: 'setting'
+                tooltip: vscode.l10n.t('Open Setting'),
+                type: 'setting',
             },
         ] as BookmarkTitleButton[];
         quickPick.onDidTriggerButton((btn) => {
-            if((btn as BookmarkTitleButton).type === 'setting') {
-                vscode.commands.executeCommand(Commands.openSetting);
+            if ((btn as BookmarkTitleButton).type === 'setting') {
+                openSetting();
             }
             resolve();
         });

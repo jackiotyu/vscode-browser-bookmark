@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { ChromeBookmarkTree, BookmarkItem, refreshChromeEvent } from './lib/treeDataProvider';
 import { Commands } from './constants';
-import { checkUseExternal, openInternal } from './lib/utils';
+import { checkUseExternal, openInternal, openSetting } from './lib/utils';
 import { pickBookmark } from './lib/quickPick';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -25,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
         }),
         vscode.commands.registerCommand(Commands.copyLink, async (item: BookmarkItem) => {
             await vscode.env.clipboard.writeText(item.url);
-            vscode.window.showInformationMessage('Copy Success, link is ' + item.url);
+            vscode.window.showInformationMessage(vscode.l10n.t('Copy Success, link is {0}', item.url));
         }),
         vscode.commands.registerCommand(Commands.refresh, () => {
             refreshChromeEvent.fire();
@@ -43,9 +43,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand(Commands.openExternal, async (item: BookmarkItem) => {
             item && openExternal(item.url);
         }),
-        vscode.commands.registerCommand(Commands.openSetting, () => {
-            void vscode.commands.executeCommand('workbench.action.openSettings', `@ext:jackiotyu.browser-bookmark`);
-        }),
+        vscode.commands.registerCommand(Commands.openSetting, openSetting),
     );
 }
 

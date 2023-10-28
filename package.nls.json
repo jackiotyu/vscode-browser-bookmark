@@ -1,0 +1,13 @@
+{
+    "cmd.openLink": "Open Link",
+    "cmd.copyLink": "Copy Link",
+    "cmd.openInternal": "Open in internal browser",
+    "cmd.openExternal": "Open in external browser",
+    "cmd.refresh": "Refresh",
+    "cmd.search": "Search Bookmark",
+    "cmd.openSetting": "Open Setting",
+    "config.defaultOpenWith.description": "Set \"external\" to open bookmark in external browser, or \"internal\" to open in internal browser",
+    "config.defaultOpenWith.enumDescriptions.internal": "Open in internal browser",
+    "config.defaultOpenWith.enumDescriptions.external": "Open in external browser",
+    "config.internalBrowserOpenCommand.description": "Configure command for open internal browser, default is \"simpleBrowser.api.open\". Make sure it works!"
+}

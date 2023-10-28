@@ -2,7 +2,7 @@
   "publisher": "jackiotyu",
   "name": "browser-bookmark",
   "displayName": "Browser Bookmark",
-  "description": "esay use browser's bookmark",
+  "description": "Using browser's bookmark in VSCode🎉 在VSCode中使用浏览器书签",
   "version": "0.0.6",
   "engines": {
     "vscode": "^1.79.0"
@@ -22,72 +22,74 @@
     "bookmark",
     "chrome bookmark",
     "browse bookmark",
-    "open bookmark"
+    "open bookmark",
+    "浏览器书签"
   ],
   "activationEvents": [],
   "main": "./dist/extension.js",
+  "l10n": "./l10n",
   "contributes": {
     "commands": [
       {
         "command": "browser-bookmark.openLink",
-        "title": "Open Link"
+        "title": "%cmd.openLink%"
       },
       {
         "command": "browser-bookmark.copyLink",
-        "title": "Copy Link"
+        "title": "%cmd.copyLink%"
       },
       {
         "command": "browser-bookmark.openInternal",
-        "title": "Open in built-in browser"
+        "title": "%cmd.openInternal%"
       },
       {
         "command": "browser-bookmark.openExternal",
-        "title": "Open in external browser"
+        "title": "%cmd.openExternal%"
       },
       {
         "command": "browser-bookmark.refresh",
-        "title": "Refresh",
+        "title": "%cmd.refresh%",
         "icon": "$(refresh)"
       },
       {
         "command": "browser-bookmark.search",
-        "title": "Search Bookmark",
+        "title": "%cmd.search%",
         "icon": "$(search)"
       },
       {
         "command": "browser-bookmark.openSetting",
-        "title": "Open Setting",
+        "title": "%cmd.openSetting%",
         "icon": "$(gear)"
       }
     ],
     "menus": {
       "view/item/context": [
         {
-          "when": "view == chrome && viewItem == browser-bookmark.url",
+          "when": "view == BrowserBookmark.chrome && viewItem == browser-bookmark.url",
           "command": "browser-bookmark.copyLink"
         },
         {
-          "when": "view == chrome && viewItem == browser-bookmark.url",
+          "when": "view == BrowserBookmark.chrome && viewItem == browser-bookmark.url",
           "command": "browser-bookmark.openInternal"
         },
         {
-          "when": "view == chrome && viewItem == browser-bookmark.url",
+          "when": "view == BrowserBookmark.chrome && viewItem == browser-bookmark.url",
           "command": "browser-bookmark.openExternal"
         }
       ],
       "view/title": [
         {
-          "when": "view == chrome",
+          "when": "view == BrowserBookmark.chrome",
           "command": "browser-bookmark.refresh",
           "group": "navigation@1"
         },
         {
-          "when": "view == chrome",
+          "when": "view == BrowserBookmark.chrome",
           "command": "browser-bookmark.search",
           "group": "navigation@2"
         },
         {
-          "when": "view == chrome",
+          "when": "view == BrowserBookmark.chrome",
           "command": "browser-bookmark.openSetting",
           "group": "navigation@100"
         }
@@ -123,7 +125,7 @@
     "views": {
       "BrowserBookmark": [
         {
-          "id": "chrome",
+          "id": "BrowserBookmark.chrome",
           "name": "chrome"
         }
       ]
@@ -139,19 +141,22 @@
       "properties": {
         "browser-bookmark.defaultOpenWith": {
           "scope": "application",
-          "enum": ["internal", "external"],
+          "enum": [
+            "internal",
+            "external"
+          ],
           "enumDescriptions": [
-            "open in internal Browser",
-            "open bookmark in external browser"
+            "%config.defaultOpenWith.enumDescriptions.internal%",
+            "%config.defaultOpenWith.enumDescriptions.external%"
           ],
           "default": "external",
-          "description": "Set \"external\" to open bookmark in external browser, or \"internal\" to open in internal browser"
+          "description": "%config.defaultOpenWith.description%"
         },
         "browser-bookmark.internalBrowserOpenCommand": {
           "scope": "application",
           "type": "string",
           "default": "simpleBrowser.api.open",
-          "description": "Configure command for open internal browser, default is \"simpleBrowser.api.open\". Make sure it works!"
+          "description": "%config.internalBrowserOpenCommand.description%"
         }
       }
     }
@@ -186,6 +191,7 @@
     "webpack-cli": "^5.1.1"
   },
   "dependencies": {
+    "@vscode/l10n": "^0.0.16",
     "fuse.js": "^6.6.2",
     "ini": "^4.1.1",
     "sql.js": "^1.8.0"

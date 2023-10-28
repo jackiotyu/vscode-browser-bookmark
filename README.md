@@ -1,6 +1,5 @@
 # Browser Bookmark
-
-**Quick open url through chrome's bookmark**
+*Quick open url through chrome's bookmark*
 
 ![Preview](https://cdn.jsdelivr.net/gh/jackiotyu/vscode-browser-bookmark@0.0.2/images/preview.png)
 
@@ -11,7 +10,7 @@
 - Click `Cmd + Shift + v` in macOS to open `Browser Bookmark` search quickly.
 - Click `Ctrl + Shift + v` in windows/linux to open `Browser Bookmark` search quickly.
 
-2. Click the link to open Chrome.
+2. Click the link to open in Chrome or internal browser.
 
 ### Setting
 ```json
