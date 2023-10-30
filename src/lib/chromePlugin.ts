@@ -2,7 +2,7 @@
  * @description fork from
  * {@link https://github.com/crunchtime-ali/browser-bookmark-manager}
  */
-import childProc from 'child_process';
+import * as vscode from 'vscode';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
@@ -29,13 +29,24 @@ class ChromePlugin {
      * @return {string}         path to Bookmarks file
      */
     static getBookmarkLocation(profile: string) {
+        let config = vscode.workspace.getConfiguration('browser-bookmark');
+        console.log(`config.get('path.win.chrome')`, config.get('path.win.chrome'));
         // Determine Chrome config location
         if (os.type() === 'Darwin') {
-            return `${os.homedir()}/Library/Application Support/Google/Chrome/${profile}/Bookmarks`;
+            return (
+                config.get('path.mac.chrome') ||
+                `${os.homedir()}/Library/Application Support/Google/Chrome/${profile}/Bookmarks`
+            );
         } else if (os.type() === 'Windows_NT') {
-            return path.join(os.homedir(), 'AppData', 'Local', 'Google', 'Chrome', 'User Data', profile, 'Bookmarks');
+            return (
+                config.get('path.win.chrome') ||
+                path.join(os.homedir(), 'AppData', 'Local', 'Google', 'Chrome', 'User Data', profile, 'Bookmarks')
+            );
         } else if (os.type() === 'Linux') {
-            return path.join(os.homedir(), '.config', 'google-chrome', profile, 'Bookmarks');
+            return (
+                config.get('path.linux.chrome') ||
+                path.join(os.homedir(), '.config', 'google-chrome', profile, 'Bookmarks')
+            );
         }
     }
 

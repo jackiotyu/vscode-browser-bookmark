@@ -157,6 +157,42 @@
           "type": "string",
           "default": "simpleBrowser.api.open",
           "description": "%config.internalBrowserOpenCommand.description%"
+        },
+        "browser-bookmark.path.win.chrome": {
+          "scope": "machine",
+          "type": "string",
+          "default": "",
+          "description": "%config.path.win.chrome.description%"
+        },
+        "browser-bookmark.path.mac.chrome": {
+          "scope": "machine",
+          "type": "string",
+          "default": "",
+          "description": "%config.path.mac.chrome.description%"
+        },
+        "browser-bookmark.path.linux.chrome": {
+          "scope": "machine",
+          "type": "string",
+          "default": "",
+          "description": "%config.path.linux.chrome.description%"
+        },
+        "browser-bookmark.path.win.edge": {
+          "scope": "machine",
+          "type": "string",
+          "default": "",
+          "description": "%config.path.win.edge.description%"
+        },
+        "browser-bookmark.path.mac.edge": {
+          "scope": "machine",
+          "type": "string",
+          "default": "",
+          "description": "%config.path.mac.edge.description%"
+        },
+        "browser-bookmark.path.linux.edge": {
+          "scope": "machine",
+          "type": "string",
+          "default": "",
+          "description": "%config.path.linux.edge.description%"
         }
       }
     }

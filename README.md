@@ -25,6 +25,20 @@
     // If you prefer other extension, such as "Browse Lite",
     // Set it to "browse-lite.open" to open through "Browse Lite".
     "browser-bookmark.internalBrowserOpenCommand": "simpleBrowser.api.open",
+
+    // Configuration for special bookmark file path.
+    // Chrome's bookmark file path in linux
+    "browser-bookmark.path.linux.chrome": "",
+    // Microsoft Edge's bookmark file path in linux
+    "browser-bookmark.path.linux.edge": "",
+    // Chrome's bookmark file path in macOS
+    "browser-bookmark.path.mac.chrome": "",
+    // Microsoft Edge's bookmark file path in macOS
+    "browser-bookmark.path.mac.edge": "",
+    // Chrome's bookmark file path in windows
+    "browser-bookmark.path.win.chrome": "",
+    // Microsoft Edge's bookmark file path in windows
+    "browser-bookmark.path.win.edge": ""
 }
 ```
 

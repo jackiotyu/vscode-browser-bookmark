@@ -1,4 +1,4 @@
-import childProc from 'child_process';
+import * as vscode from 'vscode';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
@@ -23,13 +23,23 @@ class EdgePlugin {
      * @return {string}         path to Bookmarks file
      */
     static getBookmarkLocation(profile: string) {
-        // Determine Chrome config location
+        let config = vscode.workspace.getConfiguration('browser-bookmark');
+        // Determine Edge config location
         if (os.type() === 'Darwin') {
-            return `${os.homedir()}/Library/Application Support/Microsoft Edge/${profile}/Bookmarks`;
+            return (
+                config.get('path.mac.edge') ||
+                `${os.homedir()}/Library/Application Support/Microsoft Edge/${profile}/Bookmarks`
+            );
         } else if (os.type() === 'Windows_NT') {
-            return path.join(os.homedir(), 'AppData', 'Local', 'Microsoft', 'Edge', 'User Data', profile, 'Bookmarks');
+            return (
+                config.get('path.win.edge') ||
+                path.join(os.homedir(), 'AppData', 'Local', 'Microsoft', 'Edge', 'User Data', profile, 'Bookmarks')
+            );
         } else if (os.type() === 'Linux') {
-            return path.join(os.homedir(), '.config', 'microsoft-edge', profile, 'Bookmarks');
+            return (
+                config.get('path.linux.edge') ||
+                path.join(os.homedir(), '.config', 'microsoft-edge', profile, 'Bookmarks')
+            );
         }
     }
 
