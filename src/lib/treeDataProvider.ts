@@ -11,7 +11,9 @@ export class BookmarkItem extends vscode.TreeItem {
     constructor(label: string, collapsible: vscode.TreeItemCollapsibleState, url: string) {
         super(label || url, collapsible);
         this.url = url;
-        this.iconPath = new vscode.ThemeIcon('tag', new vscode.ThemeColor('charts.lines'));
+        // const faviconUrl = `chrome://favicon/http://${new URL(url).hostname}`;
+        const faviconUrl = `https://favicon.yandex.net/favicon/${new URL(url).hostname}`;
+        this.iconPath = vscode.Uri.parse(faviconUrl);
         this.tooltip = new vscode.MarkdownString(``, true);
         this.tooltip.appendMarkdown(`$(tag) ${label || url}\n\n`);
         this.tooltip.appendMarkdown(`$(link) ${url}\n\n`);

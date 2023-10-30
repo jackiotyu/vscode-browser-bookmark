@@ -15,7 +15,7 @@ export const pickBookmark = (bookmarkList: Bookmark[]): Promise<BookmarkPickItem
         const quickPick = vscode.window.createQuickPick<BookmarkPickItem>();
         const items: BookmarkPickItem[] = bookmarkList.map((item) => {
             return {
-                label: item.name || item.value,
+                label: `$(tag) ` + (item.name || item.value),
                 detail: item.value,
                 description: '$(link)',
                 url: item.value,
