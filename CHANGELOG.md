@@ -1,3 +1,9 @@
+## [0.0.9] - 2023-10-31
+
+### Added
+
+- Add bookmark file path configuration.
+
 ## [0.0.8] - 2023-10-30
 
 ### Added
