@@ -1,24 +1,45 @@
 import * as vscode from 'vscode';
 import { checkUseExternal, openSetting } from './utils';
-import { Bookmark } from './chromePlugin';
+import { BrowserType } from '../type';
 
 interface BookmarkPickItem extends vscode.QuickPickItem {
     url: string;
+    browser: BrowserType;
 }
 
 interface BookmarkTitleButton extends vscode.QuickInputButton {
     type: 'setting';
 }
 
+interface Bookmark {
+    name: string;
+    value: string;
+    type: BrowserType;
+}
+
+const distinctBookmark = (bookmarkList: Bookmark[]): Bookmark[] => {
+    const set = new Set<string>();
+    const result: Bookmark[] = [];
+    bookmarkList.forEach((bookmark) => {
+        const key = bookmark.name + ' ~~ ' + bookmark.value;
+        if (!set.has(key)) {
+            set.add(key);
+            result.push(bookmark);
+        }
+    });
+    return result;
+};
+
 export const pickBookmark = (bookmarkList: Bookmark[]): Promise<BookmarkPickItem | void> => {
     return new Promise((resolve) => {
         const quickPick = vscode.window.createQuickPick<BookmarkPickItem>();
-        const items: BookmarkPickItem[] = bookmarkList.map((item) => {
+        const items: BookmarkPickItem[] = distinctBookmark(bookmarkList).map((item) => {
             return {
                 label: `$(tag) ` + (item.name || item.value),
                 detail: item.value,
                 description: '$(link)',
                 url: item.value,
+                browser: item.type,
             };
         });
 

@@ -19,6 +19,7 @@ export type NestChildren = Array<NestChildren> & {
 export interface Bookmark {
     name: string;
     value: string;
+    type: 'chrome';
 }
 
 class ChromePlugin {
@@ -73,6 +74,7 @@ class ChromePlugin {
                         bookmarkItems.push({
                             name: res.value.name as string,
                             value: res.value.url as string,
+                            type: 'chrome' as 'chrome',
                         });
                     }
                     res = it.next();
@@ -81,16 +83,6 @@ class ChromePlugin {
             return bookmarkItems;
         } catch {
             return [];
-        }
-    }
-
-    open(url: string) {
-        if (os.type() === 'Darwin') {
-            childProc.exec(`open -a "Google Chrome" "${url}"`);
-        } else if (os.type() === 'Windows_NT') {
-            childProc.exec(`start chrome "${url}"`);
-        } else if (os.type() === 'Linux') {
-            childProc.exec(`chrome "${url}"`);
         }
     }
 }

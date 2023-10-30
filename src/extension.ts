@@ -1,26 +1,34 @@
 import * as vscode from 'vscode';
-import { ChromeBookmarkTree, BookmarkItem, refreshChromeEvent } from './lib/treeDataProvider';
+import {
+    BookmarkTree,
+    BookmarkItem,
+    refreshBookmarkEvent,
+} from './lib/treeDataProvider';
 import { Commands } from './constants';
 import { checkUseExternal, openInternal, openSetting } from './lib/utils';
 import { pickBookmark } from './lib/quickPick';
+import open from 'open';
 
 export function activate(context: vscode.ExtensionContext) {
-    const chromeBookmarkTree = new ChromeBookmarkTree(context);
+    const bookmarkTree = new BookmarkTree(context);
 
-    const openExternal = (url: string) => chromeBookmarkTree.chromePlugin.open(url);
+    const openExternal = (url: string) => {
+        // FIXME use vscode.env.openExternal ?
+        open(url);
+    };
     const autoOpenUrl = (url: string) => {
         if (checkUseExternal()) openExternal(url);
         else openInternal(url);
     };
 
-    const chromeTree = vscode.window.createTreeView(ChromeBookmarkTree.id, {
-        treeDataProvider: chromeBookmarkTree,
+    const bookmarkTreeView = vscode.window.createTreeView(BookmarkTree.id, {
+        treeDataProvider: bookmarkTree,
         showCollapseAll: true,
     });
-    context.subscriptions.push(chromeTree);
-    context.subscriptions.push(refreshChromeEvent);
+    context.subscriptions.push(bookmarkTreeView);
+    context.subscriptions.push(refreshBookmarkEvent);
     context.subscriptions.push(
-        vscode.commands.registerCommand(Commands.openLink, (url: string, type: 'chrome') => {
+        vscode.commands.registerCommand(Commands.openLink, (url: string) => {
             autoOpenUrl(url);
         }),
         vscode.commands.registerCommand(Commands.copyLink, async (item: BookmarkItem) => {
@@ -28,10 +36,15 @@ export function activate(context: vscode.ExtensionContext) {
             vscode.window.showInformationMessage(vscode.l10n.t('Copy Success, link is {0}', item.url));
         }),
         vscode.commands.registerCommand(Commands.refresh, () => {
-            refreshChromeEvent.fire();
+            refreshBookmarkEvent.fire();
         }),
         vscode.commands.registerCommand(Commands.search, async () => {
-            const item = await pickBookmark(chromeBookmarkTree.chromePlugin.getBookmarks());
+            const item = await pickBookmark(
+                [
+                    ...bookmarkTree.chromePlugin.getBookmarks(),
+                    ...bookmarkTree.edgePlugin.getBookmarks(),
+                ]
+            );
             if (!item) {
                 return;
             }

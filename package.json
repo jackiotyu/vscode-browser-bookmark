@@ -65,31 +65,31 @@
     "menus": {
       "view/item/context": [
         {
-          "when": "view == BrowserBookmark.chrome && viewItem == browser-bookmark.url",
+          "when": "view == BrowserBookmark.bookmark && viewItem == browser-bookmark.url",
           "command": "browser-bookmark.copyLink"
         },
         {
-          "when": "view == BrowserBookmark.chrome && viewItem == browser-bookmark.url",
+          "when": "view == BrowserBookmark.bookmark && viewItem == browser-bookmark.url",
           "command": "browser-bookmark.openInternal"
         },
         {
-          "when": "view == BrowserBookmark.chrome && viewItem == browser-bookmark.url",
+          "when": "view == BrowserBookmark.bookmark && viewItem == browser-bookmark.url",
           "command": "browser-bookmark.openExternal"
         }
       ],
       "view/title": [
         {
-          "when": "view == BrowserBookmark.chrome",
+          "when": "view == BrowserBookmark.bookmark",
           "command": "browser-bookmark.refresh",
           "group": "navigation@1"
         },
         {
-          "when": "view == BrowserBookmark.chrome",
+          "when": "view == BrowserBookmark.bookmark",
           "command": "browser-bookmark.search",
           "group": "navigation@2"
         },
         {
-          "when": "view == BrowserBookmark.chrome",
+          "when": "view == BrowserBookmark.bookmark",
           "command": "browser-bookmark.openSetting",
           "group": "navigation@100"
         }
@@ -125,8 +125,8 @@
     "views": {
       "BrowserBookmark": [
         {
-          "id": "BrowserBookmark.chrome",
-          "name": "chrome"
+          "id": "BrowserBookmark.bookmark",
+          "name": "bookmark"
         }
       ]
     },
@@ -194,6 +194,7 @@
     "@vscode/l10n": "^0.0.16",
     "fuse.js": "^6.6.2",
     "ini": "^4.1.1",
+    "open": "^9.1.0",
     "sql.js": "^1.8.0"
   }
 }
