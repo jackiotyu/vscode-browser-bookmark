@@ -1,3 +1,14 @@
+## [0.0.8] - 2023-10-30
+
+### Added
+
+- Support edge bookmark.
+- Add tree item favicon through `https://favicon.yandex.net/favicon`
+
+### Fixed
+
+- Catch initialization error.
+
 ## [0.0.7] - 2023-10-28
 
 ### Added

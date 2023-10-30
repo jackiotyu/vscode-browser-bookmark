@@ -3,7 +3,7 @@
   "name": "browser-bookmark",
   "displayName": "Browser Bookmark",
   "description": "Using browser's bookmark in VSCode🎉 在VSCode中使用浏览器书签",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "engines": {
     "vscode": "^1.79.0"
   },
