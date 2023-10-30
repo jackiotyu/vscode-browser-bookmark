@@ -1,5 +1,5 @@
 # Browser Bookmark
-*Quick open url through chrome's bookmark*
+*Quick open url through browser's bookmark*
 
 ![Preview](https://cdn.jsdelivr.net/gh/jackiotyu/vscode-browser-bookmark@0.0.2/images/preview.png)
 
@@ -27,3 +27,12 @@
     "browser-bookmark.internalBrowserOpenCommand": "simpleBrowser.api.open",
 }
 ```
+
+## Roadmap
+
+- [x] Edge bookmark.
+- [x] Chrome bookmark.
+- [ ] Firefox bookmark.
+- [ ] Safari bookmark.
+- [ ] Multi-language Support.
+    - [x] Chinese.
