@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { BookmarkTree, BookmarkItem, BrowserFolder, refreshBookmarkEvent } from './lib/treeDataProvider';
 import { Commands } from './constants';
-import { checkUseExternal, openInternal, openSetting, getPlatform } from './lib/utils';
+import { checkUseExternal, openInternal, openExternal, openSetting, getPlatform } from './lib/utils';
 import { pickBookmark } from './lib/quickPick';
 import { ChromePlugin } from './lib/chromePlugin';
 import { EdgePlugin } from './lib/edgePlugin';
@@ -10,12 +10,6 @@ import path from 'path';
 
 export function activate(context: vscode.ExtensionContext) {
     const bookmarkTree = new BookmarkTree(context);
-
-    const openExternal = (url: string) => {
-        // FIXME use vscode.env.openExternal ?
-        vscode.env.openExternal(vscode.Uri.parse(url));
-        // open(url);
-    };
     const autoOpenUrl = (url: string) => {
         if (checkUseExternal()) openExternal(url);
         else openInternal(url);

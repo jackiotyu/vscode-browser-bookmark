@@ -12,8 +12,12 @@ export const openInternal = (url: string) => {
     const openCmd = vscode.workspace
         .getConfiguration('browser-bookmark')
         .get<string>('internalBrowserOpenCommand', 'simpleBrowser.api.open');
-    vscode.commands.executeCommand(openCmd, vscode.Uri.parse(url));
+   return vscode.commands.executeCommand(openCmd, vscode.Uri.parse(url));
 };
+
+export const openExternal = (url: string) => {
+    return vscode.env.openExternal(vscode.Uri.parse(url));
+}
 
 export const openSetting = () => {
     void vscode.commands.executeCommand('workbench.action.openSettings', `@ext:jackiotyu.browser-bookmark`);

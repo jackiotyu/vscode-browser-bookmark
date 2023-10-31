@@ -1,10 +1,15 @@
 import * as vscode from 'vscode';
-import { checkUseExternal, openSetting } from './utils';
+import { checkUseExternal, openSetting, openInternal, openExternal } from './utils';
 import { BrowserType } from '../type';
+
+interface BookmarkButton extends vscode.QuickInputButton {
+    type: 'internal' | 'external';
+}
 
 interface BookmarkPickItem extends vscode.QuickPickItem {
     url: string;
     browser: BrowserType;
+    buttons: BookmarkButton[],
 }
 
 interface BookmarkTitleButton extends vscode.QuickInputButton {
@@ -33,21 +38,33 @@ const distinctBookmark = (bookmarkList: Bookmark[]): Bookmark[] => {
 export const pickBookmark = (bookmarkList: Bookmark[]): Promise<BookmarkPickItem | void> => {
     return new Promise((resolve) => {
         const quickPick = vscode.window.createQuickPick<BookmarkPickItem>();
+        const isOpenExternal = checkUseExternal();
+        const innerOpenExternal = !isOpenExternal;
+        const openExternalTips = vscode.l10n.t('Click to open in {0} browser', vscode.l10n.t('external'));
+        const openInternalTips = vscode.l10n.t('Click to open in {0} browser', vscode.l10n.t('internal'));
+        const linkExternalIcon = new vscode.ThemeIcon('link-external');
+        const arrowRightIcon = new vscode.ThemeIcon('arrow-right');
+
         const items: BookmarkPickItem[] = distinctBookmark(bookmarkList).map((item) => {
             return {
-                label: `$(tag) ` + (item.name || item.value),
-                detail: item.value,
-                description: '$(link)',
+                label: `${item.name || new URL(item.value).hostname}`,
+                detail: '$(arrow-small-right) ' + item.value,
+                description: '',
                 url: item.value,
                 browser: item.type,
+                iconPath: vscode.Uri.parse(`https://favicon.yandex.net/favicon/${new URL(item.value).hostname}`),
+                buttons: [
+                    {
+                        iconPath: innerOpenExternal ? linkExternalIcon : arrowRightIcon,
+                        tooltip: innerOpenExternal ?  openExternalTips : openInternalTips,
+                        type: innerOpenExternal ? 'external' : 'internal',
+                    },
+                ],
             };
         });
 
         quickPick.title = vscode.l10n.t('Search Bookmark');
-        quickPick.placeholder = vscode.l10n.t(
-            'Click to open in {0} browser',
-            checkUseExternal() ? vscode.l10n.t('external') : vscode.l10n.t('internal'),
-        );
+        quickPick.placeholder = isOpenExternal ? openExternalTips : openInternalTips;
         quickPick.items = items;
         quickPick.ignoreFocusOut = false;
         quickPick.canSelectMany = false;
@@ -66,6 +83,17 @@ export const pickBookmark = (bookmarkList: Bookmark[]): Promise<BookmarkPickItem
             }
             resolve();
         });
+        quickPick.onDidTriggerItemButton((event) => {
+            const item = event.item;
+            const btn = event.button as BookmarkButton;
+            if(!item.browser || !item.url || !btn) return;
+            if(btn.type === 'external') {
+                openExternal(item.url)
+            } else {
+                openInternal(item.url);
+            }
+            resolve();
+        })
         quickPick.onDidAccept(() => {
             resolve(quickPick.selectedItems[0]);
         });
