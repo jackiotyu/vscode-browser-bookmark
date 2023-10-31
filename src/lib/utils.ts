@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import os from 'os';
 
 export const checkUseExternal = () => {
     let defaultOpenWith = vscode.workspace
@@ -16,4 +17,15 @@ export const openInternal = (url: string) => {
 
 export const openSetting = () => {
     void vscode.commands.executeCommand('workbench.action.openSettings', `@ext:jackiotyu.browser-bookmark`);
+};
+
+export const getPlatform = () => {
+    if (os.type() === 'Darwin') {
+        return 'mac';
+    } else if (os.type() === 'Windows_NT') {
+        return 'win';
+    } else if (os.type() === 'Linux') {
+        return 'linux';
+    }
+    return 'unknown';
 };

@@ -60,6 +60,11 @@
         "command": "browser-bookmark.openSetting",
         "title": "%cmd.openSetting%",
         "icon": "$(gear)"
+      },
+      {
+        "command": "browser-bookmark.changeBookmarkFile",
+        "title": "%cmd.changeBookmarkFile%",
+        "icon": "$(symbol-property)"
       }
     ],
     "menus": {
@@ -75,6 +80,11 @@
         {
           "when": "view == BrowserBookmark.bookmark && viewItem == browser-bookmark.url",
           "command": "browser-bookmark.openExternal"
+        },
+        {
+          "when": "view == BrowserBookmark.bookmark && viewItem == browser-bookmark.browser",
+          "command": "browser-bookmark.changeBookmarkFile",
+          "group": "inline"
         }
       ],
       "view/title": [
@@ -109,6 +119,10 @@
         },
         {
           "command": "browser-bookmark.openExternal",
+          "when": "false"
+        },
+        {
+          "command": "browser-bookmark.changeBookmarkFile",
           "when": "false"
         }
       ]

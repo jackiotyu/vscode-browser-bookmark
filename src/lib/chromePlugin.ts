@@ -22,29 +22,30 @@ export interface Bookmark {
     type: 'chrome';
 }
 
-class ChromePlugin {
+// TODO 整合结构，使用ioc
+export class ChromePlugin {
     /**
      * Determines the location of the file containing the bookmarks
      * @param  {string} profile name of profiel
      * @return {string}         path to Bookmarks file
      */
-    static getBookmarkLocation(profile: string) {
+    static getBookmarkLocation(profile: string = 'Default') {
         let config = vscode.workspace.getConfiguration('browser-bookmark');
         console.log(`config.get('path.win.chrome')`, config.get('path.win.chrome'));
         // Determine Chrome config location
         if (os.type() === 'Darwin') {
             return (
-                config.get('path.mac.chrome') ||
+                config.get<string>('path.mac.chrome', '') ||
                 `${os.homedir()}/Library/Application Support/Google/Chrome/${profile}/Bookmarks`
             );
         } else if (os.type() === 'Windows_NT') {
             return (
-                config.get('path.win.chrome') ||
+                config.get<string>('path.win.chrome', '') ||
                 path.join(os.homedir(), 'AppData', 'Local', 'Google', 'Chrome', 'User Data', profile, 'Bookmarks')
             );
         } else if (os.type() === 'Linux') {
             return (
-                config.get('path.linux.chrome') ||
+                config.get<string>('path.linux.chrome', '') ||
                 path.join(os.homedir(), '.config', 'google-chrome', profile, 'Bookmarks')
             );
         }

@@ -5,5 +5,6 @@
     "external": "外部",
     "internal": "内置",
     "Copy Success, link is {0}": "复制成功，链接为 {0}",
-    "Open Link": "打开链接"
+    "Open Link": "打开链接",
+    "Select Bookmark File": "选择书签文件"
 }

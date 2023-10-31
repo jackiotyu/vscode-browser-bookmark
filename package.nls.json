@@ -6,6 +6,7 @@
     "cmd.refresh": "Refresh",
     "cmd.search": "Search Bookmark",
     "cmd.openSetting": "Open Setting",
+    "cmd.changeBookmarkFile": "Change bookmark file path",
     "config.defaultOpenWith.description": "Set \"external\" to open bookmark in external browser, or \"internal\" to open in internal browser",
     "config.defaultOpenWith.enumDescriptions.internal": "Open in internal browser",
     "config.defaultOpenWith.enumDescriptions.external": "Open in external browser",

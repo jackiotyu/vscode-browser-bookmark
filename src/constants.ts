@@ -6,4 +6,5 @@ export enum Commands {
     openInternal = 'browser-bookmark.openInternal',
     openExternal = 'browser-bookmark.openExternal',
     openSetting = 'browser-bookmark.openSetting',
+    changeBookmarkFile = 'browser-bookmark.changeBookmarkFile',
 }

@@ -16,28 +16,28 @@ export interface Bookmark {
     type: 'edge';
 }
 
-class EdgePlugin {
+export class EdgePlugin {
     /**
      * Determines the location of the file containing the bookmarks
      * @param  {string} profile name of profiel
      * @return {string}         path to Bookmarks file
      */
-    static getBookmarkLocation(profile: string) {
+    static getBookmarkLocation(profile: string = 'Default') {
         let config = vscode.workspace.getConfiguration('browser-bookmark');
         // Determine Edge config location
         if (os.type() === 'Darwin') {
             return (
-                config.get('path.mac.edge') ||
+                config.get<string>('path.mac.edge', '') ||
                 `${os.homedir()}/Library/Application Support/Microsoft Edge/${profile}/Bookmarks`
             );
         } else if (os.type() === 'Windows_NT') {
             return (
-                config.get('path.win.edge') ||
+                config.get<string>('path.win.edge', '') ||
                 path.join(os.homedir(), 'AppData', 'Local', 'Microsoft', 'Edge', 'User Data', profile, 'Bookmarks')
             );
         } else if (os.type() === 'Linux') {
             return (
-                config.get('path.linux.edge') ||
+                config.get<string>('path.linux.edge', '') ||
                 path.join(os.homedir(), '.config', 'microsoft-edge', profile, 'Bookmarks')
             );
         }

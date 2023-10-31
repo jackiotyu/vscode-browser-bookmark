@@ -49,7 +49,7 @@ class BookmarkFolder extends vscode.TreeItem {
     }
 }
 
-class BrowserFolder extends vscode.TreeItem {
+export class BrowserFolder extends vscode.TreeItem {
     browser: BrowserType;
     readonly type = 'browser';
     constructor(
@@ -59,6 +59,7 @@ class BrowserFolder extends vscode.TreeItem {
     ) {
         super(label, collapsible);
         this.browser = label;
+        this.contextValue = `browser-bookmark.browser`;
     }
 }
 
