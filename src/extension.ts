@@ -7,14 +7,15 @@ import {
 import { Commands } from './constants';
 import { checkUseExternal, openInternal, openSetting } from './lib/utils';
 import { pickBookmark } from './lib/quickPick';
-import open from 'open';
+// import open from 'open';
 
 export function activate(context: vscode.ExtensionContext) {
     const bookmarkTree = new BookmarkTree(context);
 
     const openExternal = (url: string) => {
         // FIXME use vscode.env.openExternal ?
-        open(url);
+        vscode.env.openExternal(vscode.Uri.parse(url))
+        // open(url);
     };
     const autoOpenUrl = (url: string) => {
         if (checkUseExternal()) openExternal(url);
