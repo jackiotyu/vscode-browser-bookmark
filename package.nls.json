@@ -1,6 +1,6 @@
 {
-    "cmd.openLink": "Open Link",
-    "cmd.copyLink": "Copy Link",
+    "cmd.openLink": "Open link",
+    "cmd.copyLink": "Copy link",
     "cmd.openInternal": "Open in internal browser",
     "cmd.openExternal": "Open in external browser",
     "cmd.refresh": "Refresh",

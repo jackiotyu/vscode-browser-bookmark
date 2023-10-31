@@ -48,7 +48,7 @@ export const pickBookmark = (bookmarkList: Bookmark[]): Promise<BookmarkPickItem
         const items: BookmarkPickItem[] = distinctBookmark(bookmarkList).map((item) => {
             return {
                 label: `${item.name || new URL(item.value).hostname}`,
-                detail: '$(arrow-small-right) ' + item.value,
+                detail: '$(circle-small-filled) ' + item.value,
                 description: '',
                 url: item.value,
                 browser: item.type,
@@ -88,12 +88,12 @@ export const pickBookmark = (bookmarkList: Bookmark[]): Promise<BookmarkPickItem
             const btn = event.button as BookmarkButton;
             if(!item.browser || !item.url || !btn) return;
             if(btn.type === 'external') {
-                openExternal(item.url)
+                openExternal(item.url);
             } else {
                 openInternal(item.url);
             }
             resolve();
-        })
+        });
         quickPick.onDidAccept(() => {
             resolve(quickPick.selectedItems[0]);
         });

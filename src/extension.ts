@@ -27,7 +27,7 @@ export function activate(context: vscode.ExtensionContext) {
         }),
         vscode.commands.registerCommand(Commands.copyLink, async (item: BookmarkItem) => {
             await vscode.env.clipboard.writeText(item.url);
-            vscode.window.showInformationMessage(vscode.l10n.t('Copy Success, link is {0}', item.url));
+            vscode.window.showInformationMessage(vscode.l10n.t('Copy success, link is {0}', item.url));
         }),
         vscode.commands.registerCommand(Commands.refresh, () => {
             refreshBookmarkEvent.fire();
