@@ -1,3 +1,11 @@
+## [0.1.2] - 2023-10-31
+
+### Added
+
+- Add `Change bookmark file path` icon in tree item.
+- Add favicon and `open in external/internal browser` button in quick pick
+- Update README.
+
 ## [0.0.9] - 2023-10-31
 
 ### Added

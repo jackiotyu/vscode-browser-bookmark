@@ -1,7 +1,7 @@
 # Browser Bookmark
 *Quick open url through browser's bookmark*
 
-![Preview](https://cdn.jsdelivr.net/gh/jackiotyu/vscode-browser-bookmark@0.0.2/images/preview.png)
+![Preview](https://cdn.jsdelivr.net/gh/jackiotyu/vscode-browser-bookmark@0.1.1/images/preview.png)
 
 ### Usage
 
