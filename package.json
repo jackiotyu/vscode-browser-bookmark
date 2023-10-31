@@ -151,7 +151,7 @@
       "command": "browser-bookmark.search"
     },
     "configuration": {
-      "title": "browser-bookmark",
+      "title": "Browser Bookmark",
       "properties": {
         "browser-bookmark.defaultOpenWith": {
           "scope": "application",

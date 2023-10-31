@@ -7,14 +7,14 @@
     "cmd.search": "搜索书签",
     "cmd.openSetting": "打开设置",
     "cmd.changeBookmarkFile": "修改书签文件路径",
-    "config.defaultOpenWith.description": "设置为\"external\"以在外部浏览器中打开书签，或者设置为\"internal\"以在内置浏览器中打开",
+    "config.defaultOpenWith.description": "设置为 \"external\" 以在外部浏览器中打开书签，或者设置为 \"internal\" 以在内置浏览器中打开",
     "config.defaultOpenWith.enumDescriptions.internal": "在内置浏览器中打开",
     "config.defaultOpenWith.enumDescriptions.external": "在外部浏览器打开",
-    "config.internalBrowserOpenCommand.description": "配置打开内置浏览器的命令，默认为\"simpleBrowser.api.open\"。请确保该命令能正常运行！",
-    "config.path.win.chrome.description": "windows上的Chrome书签文件位置",
-    "config.path.mac.chrome.description": "macOS上的Chrome书签文件位置",
-    "config.path.linux.chrome.description": "linux上的Chrome书签文件位置",
-    "config.path.win.edge.description": "windows上的Microsoft Edge书签文件位置",
-    "config.path.mac.edge.description": "macOS上的Microsoft Edge书签文件位置",
-    "config.path.linux.edge.description": "linux上的Microsoft Edge书签文件位置"
+    "config.internalBrowserOpenCommand.description": "配置打开内置浏览器的命令，默认为 \"simpleBrowser.api.open\" 。请确保该命令能正常运行！",
+    "config.path.win.chrome.description": "windows 上的 Chrome 书签文件位置",
+    "config.path.mac.chrome.description": "macOS 上的 Chrome 书签文件位置",
+    "config.path.linux.chrome.description": "linux 上的 Chrome 书签文件位置",
+    "config.path.win.edge.description": "windows 上的 Microsoft Edge 书签文件位置",
+    "config.path.mac.edge.description": "macOS上 的 Microsoft Edge 书签文件位置",
+    "config.path.linux.edge.description": "linux 上 的Microsoft Edge 书签文件位置"
 }
