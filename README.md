@@ -1,5 +1,15 @@
 # Browser Bookmark
-*Quick open url through browser's bookmark*
+*Quickly open a link through browser bookmarks*
+
+- ⚡️ Faster open internal/external browser
+- 🔒 Local file parsing
+- ✅ No Telemetry
+- 🍃 Lightweight
+- 📄 Customize bookmark file path
+
+<p align="center">
+<table><tr><td>Run <b><code>Search Bookmark</code></b> command to open search</tr></td></table>
+</p>
 
 ![Preview](https://cdn.jsdelivr.net/gh/jackiotyu/vscode-browser-bookmark@0.1.1/images/preview.png)
 
@@ -42,3 +52,7 @@
 - [ ] Safari bookmark.
 - [ ] Multi-language Support.
     - [x] Chinese.
+
+## License
+
+MIT - Copyright (c) 2023 jackiotyu
