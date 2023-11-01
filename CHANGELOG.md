@@ -1,3 +1,18 @@
+## [0.1.3] - 2023-11-01
+
+### Change
+
+- Delete configuration
+    - `browser-bookmark.path.mac.edge`
+    - `browser-bookmark.path.win.edge`
+    - `browser-bookmark.path.linux.edge`
+    - `browser-bookmark.path.mac.chrome`
+    - `browser-bookmark.path.win.chrome`
+    - `browser-bookmark.path.linux.chrome`
+- Add configuration
+    - `browser-bookmark.path.edge`
+    - `browser-bookmark.path.chrome`
+
 ## [0.1.2] - 2023-10-31
 
 ### Added
