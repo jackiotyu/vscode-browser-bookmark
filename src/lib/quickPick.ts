@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { checkUseExternal, openSetting, openInternal, openExternal } from './utils';
-import { BrowserType } from '../type';
+import { checkUseExternal, openSetting, openInternal, openExternal } from '@/lib/utils';
+import { BrowserType, Bookmark } from '@/type';
 
 interface BookmarkButton extends vscode.QuickInputButton {
     type: 'internal' | 'external';
@@ -14,12 +14,6 @@ interface BookmarkPickItem extends vscode.QuickPickItem {
 
 interface BookmarkTitleButton extends vscode.QuickInputButton {
     type: 'setting';
-}
-
-interface Bookmark {
-    name: string;
-    value: string;
-    type: BrowserType;
 }
 
 const distinctBookmark = (bookmarkList: Bookmark[]): Bookmark[] => {

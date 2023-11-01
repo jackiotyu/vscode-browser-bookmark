@@ -1,15 +1,14 @@
 import * as vscode from 'vscode';
-import { BookmarkTree, BookmarkItem, BrowserFolder, refreshBookmarkEvent } from './lib/treeDataProvider';
-import { Commands } from './constants';
-import { checkUseExternal, openInternal, openExternal, openSetting, getPlatform } from './lib/utils';
-import { pickBookmark } from './lib/quickPick';
-import { ChromePlugin } from './lib/chromePlugin';
-import { EdgePlugin } from './lib/edgePlugin';
+import { BookmarkTree, BookmarkItem, BrowserFolder, refreshBookmarkEvent } from '@/lib/provider/bookmarkTree';
+import { Commands, APP_NAME, PathConfig, browsers } from '@/constants';
+import { checkUseExternal, openInternal, openExternal, openSetting, platform } from '@/lib/utils';
+import { pickBookmark } from '@/lib/quickPick';
+import { pluginService } from '@/lib/plugin';
 import path from 'path';
 // import open from 'open';
 
 export function activate(context: vscode.ExtensionContext) {
-    const bookmarkTree = new BookmarkTree(context);
+    const bookmarkTree = new BookmarkTree(context, pluginService);
     const autoOpenUrl = (url: string) => {
         if (checkUseExternal()) openExternal(url);
         else openInternal(url);
@@ -19,6 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
         treeDataProvider: bookmarkTree,
         showCollapseAll: true,
     });
+    context.subscriptions.push(pluginService);
     context.subscriptions.push(bookmarkTreeView);
     context.subscriptions.push(refreshBookmarkEvent);
     context.subscriptions.push(
@@ -34,8 +34,7 @@ export function activate(context: vscode.ExtensionContext) {
         }),
         vscode.commands.registerCommand(Commands.search, async () => {
             const item = await pickBookmark([
-                ...bookmarkTree.chromePlugin.getBookmarks(),
-                ...bookmarkTree.edgePlugin.getBookmarks(),
+                ...browsers.map((browser) => pluginService.getBookmarks(browser)).flat(1),
             ]);
             if (!item) {
                 return;
@@ -51,16 +50,8 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand(Commands.openSetting, openSetting),
         vscode.commands.registerCommand(Commands.changeBookmarkFile, async (item: BrowserFolder) => {
             if (!item) return;
-            let browserLabel = item.browser;
-            let basePath = '';
-            switch (browserLabel) {
-                case 'chrome':
-                    basePath = ChromePlugin.getBookmarkLocation() || '';
-                    break;
-                case 'edge':
-                    basePath = EdgePlugin.getBookmarkLocation() || '';
-                    break;
-            }
+            const browserLabel = item.browser;
+            const basePath = pluginService.getBookmarkLocation(browserLabel);
             if (!basePath) return;
             const fileList = await vscode.window.showOpenDialog({
                 canSelectFiles: true,
@@ -70,8 +61,9 @@ export function activate(context: vscode.ExtensionContext) {
             });
             if (!fileList?.length) return;
             const file = fileList[0];
-            let key = `path.${getPlatform()}.${browserLabel}`;
-            vscode.workspace.getConfiguration('browser-bookmark').update(key, file.fsPath, true);
+            if (platform === 'unknown') return;
+            const key: PathConfig.AllConfig = `path.${platform}.${browserLabel}` as const;
+            vscode.workspace.getConfiguration(APP_NAME).update(key, file.fsPath, true);
         }),
     );
 }
