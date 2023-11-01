@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { BookmarkTree, BookmarkItem, BrowserFolder, refreshBookmarkEvent } from '@/lib/provider/bookmarkTree';
 import { Commands, APP_NAME, PathConfig, browsers } from '@/constants';
-import { checkUseExternal, openInternal, openExternal, openSetting, platform } from '@/lib/utils';
+import { checkUseExternal, openInternal, openExternal, openSetting, platform, adaptPathSetting } from '@/lib/utils';
 import { pickBookmark } from '@/lib/quickPick';
 import { pluginService } from '@/lib/plugin';
 import path from 'path';
@@ -14,10 +14,14 @@ export function activate(context: vscode.ExtensionContext) {
         else openInternal(url);
     };
 
+    // FIXME 兼容旧数据
+    adaptPathSetting();
+
     const bookmarkTreeView = vscode.window.createTreeView(BookmarkTree.id, {
         treeDataProvider: bookmarkTree,
         showCollapseAll: true,
     });
+
     context.subscriptions.push(pluginService);
     context.subscriptions.push(bookmarkTreeView);
     context.subscriptions.push(refreshBookmarkEvent);
@@ -62,7 +66,7 @@ export function activate(context: vscode.ExtensionContext) {
             if (!fileList?.length) return;
             const file = fileList[0];
             if (platform === 'unknown') return;
-            const key: PathConfig.AllConfig = `path.${platform}.${browserLabel}` as const;
+            const key: PathConfig.AllConfig = `path.${browserLabel}` as const;
             vscode.workspace.getConfiguration(APP_NAME).update(key, file.fsPath, true);
         }),
     );

@@ -19,15 +19,7 @@ export const VIEW_BOOKMARK = 'BrowserBookmark.bookmark';
 export const browsers = ['chrome', 'edge'] as const;
 
 export namespace PathConfig {
-    export enum Chrome {
-        mac = 'path.mac.chrome',
-        win = 'path.win.chrome',
-        linux = 'path.linux.chrome',
-    }
-    export enum Edge {
-        mac = 'path.mac.edge',
-        win = 'path.win.edge',
-        linux = 'path.linux.edge',
-    }
-    export type AllConfig = `${PathConfig.Chrome}` | `${PathConfig.Edge}`
+    export const Chrome = 'path.chrome';
+    export const Edge = 'path.edge';
+    export type AllConfig = typeof PathConfig.Chrome | typeof PathConfig.Edge
 }

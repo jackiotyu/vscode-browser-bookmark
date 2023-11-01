@@ -172,41 +172,65 @@
           "default": "simpleBrowser.api.open",
           "description": "%config.internalBrowserOpenCommand.description%"
         },
+        "browser-bookmark.path.chrome": {
+          "scope": "machine",
+          "type": "string",
+          "default": "",
+          "description": "%config.path.chrome.description%"
+        },
+        "browser-bookmark.path.edge": {
+          "scope": "machine",
+          "type": "string",
+          "default": "",
+          "description": "%config.path.edge.description%"
+        },
         "browser-bookmark.path.win.chrome": {
           "scope": "machine",
           "type": "string",
           "default": "",
-          "description": "%config.path.win.chrome.description%"
+          "description": "DEPRECATED",
+          "deprecationMessage": "DEPRECATED",
+          "markdownDeprecationMessage": "DEPRECATED"
         },
         "browser-bookmark.path.mac.chrome": {
           "scope": "machine",
           "type": "string",
           "default": "",
-          "description": "%config.path.mac.chrome.description%"
+          "description": "DEPRECATED",
+          "deprecationMessage": "DEPRECATED",
+          "markdownDeprecationMessage": "DEPRECATED"
         },
         "browser-bookmark.path.linux.chrome": {
           "scope": "machine",
           "type": "string",
           "default": "",
-          "description": "%config.path.linux.chrome.description%"
+          "description": "DEPRECATED",
+          "deprecationMessage": "DEPRECATED",
+          "markdownDeprecationMessage": "DEPRECATED"
         },
         "browser-bookmark.path.win.edge": {
           "scope": "machine",
           "type": "string",
           "default": "",
-          "description": "%config.path.win.edge.description%"
+          "description": "DEPRECATED",
+          "deprecationMessage": "DEPRECATED",
+          "markdownDeprecationMessage": "DEPRECATED"
         },
         "browser-bookmark.path.mac.edge": {
           "scope": "machine",
           "type": "string",
           "default": "",
-          "description": "%config.path.mac.edge.description%"
+          "description": "DEPRECATED",
+          "deprecationMessage": "DEPRECATED",
+          "markdownDeprecationMessage": "DEPRECATED"
         },
         "browser-bookmark.path.linux.edge": {
           "scope": "machine",
           "type": "string",
           "default": "",
-          "description": "%config.path.linux.edge.description%"
+          "description": "DEPRECATED",
+          "deprecationMessage": "DEPRECATED",
+          "markdownDeprecationMessage": "DEPRECATED"
         }
       }
     }

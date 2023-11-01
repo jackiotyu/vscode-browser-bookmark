@@ -11,10 +11,6 @@
     "config.defaultOpenWith.enumDescriptions.internal": "Open in internal browser",
     "config.defaultOpenWith.enumDescriptions.external": "Open in external browser",
     "config.internalBrowserOpenCommand.description": "Configure command for open internal browser, default is \"simpleBrowser.api.open\". Make sure it works!",
-    "config.path.win.chrome.description": "Chrome's bookmark file path in windows",
-    "config.path.mac.chrome.description": "Chrome's bookmark file path in macOS",
-    "config.path.linux.chrome.description": "Chrome's bookmark file path in linux",
-    "config.path.win.edge.description": "Microsoft Edge's bookmark file path in windows",
-    "config.path.mac.edge.description": "Microsoft Edge's bookmark file path in macOS",
-    "config.path.linux.edge.description": "Microsoft Edge's bookmark file path in linux"
+    "config.path.chrome.description": "Chrome's bookmark file path",
+    "config.path.edge.description": "Microsoft Edge's bookmark file path"
 }

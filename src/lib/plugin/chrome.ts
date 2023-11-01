@@ -27,19 +27,7 @@ export class ChromePlugin extends ChromiumBrowserPlugin implements ChromiumBrows
         return ''
     })()
     get configPath() {
-        let config = '';
-        switch (os.type()) {
-            case 'Darwin':
-                config = PathConfig.Chrome.mac;
-                break;
-            case 'Windows_NT':
-                config = PathConfig.Chrome.win;
-                break;
-            case 'Linux':
-                config = PathConfig.Chrome.linux;
-                break;
-        }
-        return vscode.workspace.getConfiguration('browser-bookmark').get<string>(config, '');
+        return vscode.workspace.getConfiguration('browser-bookmark').get<string>(PathConfig.Chrome, '');
     }
     getBookmarkLocation() {
         return this.configPath || this.defaultPath;

@@ -27,19 +27,7 @@ export class EdgePlugin extends ChromiumBrowserPlugin implements ChromiumBrowser
         return '';
     })()
     get configPath() {
-        let config = '';
-        switch (os.type()) {
-            case 'Darwin':
-                config = PathConfig.Edge.mac;
-                break;
-            case 'Windows_NT':
-                config = PathConfig.Edge.win;
-                break;
-            case 'Linux':
-                config = PathConfig.Edge.linux;
-                break;
-        }
-        return vscode.workspace.getConfiguration('browser-bookmark').get<string>(config, '');
+        return vscode.workspace.getConfiguration('browser-bookmark').get<string>(PathConfig.Edge, '');
     }
     getBookmarkLocation() {
         return this.configPath || this.defaultPath;
