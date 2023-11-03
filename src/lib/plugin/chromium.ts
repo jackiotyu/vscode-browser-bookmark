@@ -1,5 +1,7 @@
-import { BookmarkData, Bookmark, IBookmarkFolder, BookmarkItem, BrowserType, IBrowserPlugin } from '@/type';
+import { BookmarkData, Bookmark, IBookmarkFolder, BookmarkItem, BrowserType, IBrowserPlugin, IHistory } from '@/type';
 import fs from 'fs';
+import sqlite3 from 'sqlite3';
+import sqlite from 'sqlite';
 
 function isFolder(a: { [x: string | number]: any; children?: Array<any> }): a is IBookmarkFolder {
     return !!a.children;
@@ -11,6 +13,7 @@ export abstract class ChromiumBrowserPlugin implements IBrowserPlugin {
     abstract defaultPath: string;
     abstract get configPath(): string;
     abstract getBookmarkLocation(): string;
+    abstract getHistoryLocation(): string;
     public getBookmarkTree(): BookmarkData {
         try {
             const location = this.getBookmarkLocation();
@@ -28,6 +31,19 @@ export abstract class ChromiumBrowserPlugin implements IBrowserPlugin {
             let data = fs.readFileSync(location, 'utf8');
             const obj = JSON.parse(data);
             return ChromiumBrowserPlugin.flattenBookmarkTree(obj.roots, this.type);
+        } catch {
+            return [];
+        }
+    }
+    public async getHistory() {
+        try {
+            // open the database
+            const db = await sqlite.open({
+                filename: this.getHistoryLocation(),
+                driver: sqlite3.cached.Database,
+            });
+            const result = await db.all<IHistory[]>(`SELECT id, url, title FROM urls;`);
+            return result;
         } catch {
             return [];
         }

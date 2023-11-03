@@ -9,6 +9,11 @@ export interface Bookmark {
     type: BrowserType;
 };
 
+export interface IHistory {
+    title?: string;
+    url: string;
+}
+
 export interface IBookmarkFolder {
     children: Array<IBookmarkFolder | IBookmarkUrl>;
     name: string;
@@ -32,6 +37,8 @@ export interface IBrowserPlugin {
     getBookmarkLocation(): string;
     getBookmarks(): Array<Bookmark>;
     getBookmarkTree(): BookmarkData;
+    getHistoryLocation(): string;
+    getHistory?(): Promise<IHistory[]>;
 }
 
 export interface IPluginService extends Disposable {
@@ -40,6 +47,7 @@ export interface IPluginService extends Disposable {
     getBookmarkLocation(type: BrowserType): string;
     getBookmarks(type: BrowserType): Array<Bookmark>;
     getBookmarkTree(type: BrowserType): BookmarkData;
+    getHistory(type: BrowserType): Promise<IHistory[]>;
 }
 
 export interface ICommandHandler {

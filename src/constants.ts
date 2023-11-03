@@ -23,3 +23,8 @@ export namespace PathConfig {
     export const Edge = 'path.edge';
     export type AllConfig = typeof PathConfig.Chrome | typeof PathConfig.Edge
 }
+
+export enum HistoryPathConfig {
+    Chrome = 'historyPath.chrome',
+    Edge = 'historyPath.edge',
+}
