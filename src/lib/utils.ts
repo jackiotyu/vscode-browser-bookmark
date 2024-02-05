@@ -12,7 +12,7 @@ export const checkUseExternal = () => {
 export const openInternal = (url: string) => {
     const openCmd = vscode.workspace
         .getConfiguration(APP_NAME)
-        .get<string>('internalBrowserOpenCommand', 'simpleBrowser.api.open');
+        .get<string>('internalBrowserOpenCommand')?.trim() || 'simpleBrowser.api.open';
     return vscode.commands.executeCommand(openCmd, vscode.Uri.parse(url));
 };
 
