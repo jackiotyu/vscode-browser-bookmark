@@ -4,7 +4,6 @@
 - ⚡️ Faster open internal/external browser
 - 🔒 Local file parsing
 - ✅ No Telemetry
-- 🍃 Lightweight
 - 📄 Customize bookmark file path
 
 <p align="center">
@@ -48,7 +47,7 @@
 
 - [x] Edge bookmark.
 - [x] Chrome bookmark.
-- [ ] Firefox bookmark.
+- [x] Firefox bookmark.
 - [ ] Safari bookmark.
 - [ ] Multi-language Support.
     - [x] Chinese.

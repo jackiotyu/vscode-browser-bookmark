@@ -3,6 +3,7 @@
 'use strict';
 
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 //@ts-check
 /** @typedef {import('webpack').Configuration} WebpackConfig **/
@@ -17,7 +18,8 @@ const extensionConfig = {
     // the bundle is stored in the 'dist' folder (check package.json), 📖 -> https://webpack.js.org/configuration/output/
     path: path.resolve(__dirname, 'dist'),
     filename: 'extension.js',
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'commonjs2',
+    clean: true,
   },
   externals: {
     vscode: 'commonjs vscode' // the vscode-module is created on-the-fly and must be excluded. Add other modules that cannot be webpack'ed, 📖 -> https://webpack.js.org/configuration/externals/
@@ -31,6 +33,9 @@ const extensionConfig = {
     },
   },
   module: {
+    noParse: [
+      path.resolve(__dirname, "node_modules/sql.js/dist/sql-wasm.js")
+    ],
     rules: [
       {
         test: /\.ts$/,
@@ -43,6 +48,16 @@ const extensionConfig = {
       }
     ]
   },
+  plugins: [
+      new CopyPlugin({
+        patterns: [
+          {
+            from: path.resolve(__dirname, "node_modules/sql.js/dist/sql-wasm.wasm"),
+            to: './sql-wasm.wasm',
+          }
+        ]
+      })
+  ],
   devtool: 'nosources-source-map',
   infrastructureLogging: {
     level: "log", // enables logging required for problem matchers

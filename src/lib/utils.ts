@@ -34,20 +34,3 @@ export const platform = (() => {
     }
     return 'unknown';
 })();
-
-export function adaptPathSetting() {
-    let config = vscode.workspace.getConfiguration(APP_NAME);
-    const DEPRECATED = 'DEPRECATED';
-    const chromeKey = `path.${platform}.chrome`;
-    const edgeKey = `path.${platform}.edge`;
-    let chromePath = config.get(chromeKey, '');
-    let edgePath = config.get(edgeKey, '');
-    if (chromePath && chromePath !== DEPRECATED) {
-        config.update(PathConfig.Chrome, chromePath, true);
-        config.update(chromeKey, DEPRECATED, true);
-    }
-    if (edgePath && edgePath !== DEPRECATED) {
-        config.update(PathConfig.Edge, edgePath, true);
-        config.update(edgeKey, DEPRECATED, true);
-    }
-}

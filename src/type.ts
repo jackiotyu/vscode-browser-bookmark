@@ -1,7 +1,7 @@
 import type { Disposable, ExtensionContext } from 'vscode';
 import type { Commands } from '@/constants'
 
-export type BrowserType = 'chrome' | 'edge';
+export type BrowserType = 'chrome' | 'edge' | 'firefox';
 
 export interface Bookmark {
     name?: string;
@@ -30,16 +30,16 @@ export interface IBrowserPlugin {
     defaultPath: string;
     get configPath(): string;
     getBookmarkLocation(): string;
-    getBookmarks(): Array<Bookmark>;
-    getBookmarkTree(): BookmarkData;
+    getBookmarks(): Promise<Array<Bookmark>>;
+    getBookmarkTree(): Promise<BookmarkData>;
 }
 
 export interface IPluginService extends Disposable {
     use(plugin: IBrowserPlugin): void;
     attach(type: BrowserType): IBrowserPlugin | void;
     getBookmarkLocation(type: BrowserType): string;
-    getBookmarks(type: BrowserType): Array<Bookmark>;
-    getBookmarkTree(type: BrowserType): BookmarkData;
+    getBookmarks(type: BrowserType): Promise<Array<Bookmark>>;
+    getBookmarkTree(type: BrowserType): Promise<BookmarkData>;
 }
 
 export interface ICommandHandler {

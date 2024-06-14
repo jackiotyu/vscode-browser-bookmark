@@ -16,10 +16,11 @@ export const CTX_BROWSER = `${APP_NAME}.browser`;
 
 export const VIEW_BOOKMARK = 'BrowserBookmark.bookmark';
 
-export const browsers = ['chrome', 'edge'] as const;
+export const browsers = ['chrome', 'edge', 'firefox'] as const;
 
 export namespace PathConfig {
     export const Chrome = 'path.chrome';
     export const Edge = 'path.edge';
-    export type AllConfig = typeof PathConfig.Chrome | typeof PathConfig.Edge
+    export const Firefox = 'path.firefox';
+    export type AllConfig = typeof PathConfig.Chrome | typeof PathConfig.Edge | typeof PathConfig.Firefox;
 }

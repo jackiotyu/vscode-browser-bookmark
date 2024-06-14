@@ -12,5 +12,6 @@
     "config.defaultOpenWith.enumDescriptions.external": "在外部浏览器打开",
     "config.internalBrowserOpenCommand.description": "配置打开内置浏览器的命令，默认为 \"simpleBrowser.api.open\" 。请确保该命令能正常运行！",
     "config.path.chrome.description": "Chrome 书签文件位置",
-    "config.path.edge.description": "Microsoft Edge 书签文件位置"
+    "config.path.edge.description": "Microsoft Edge 书签文件位置",
+    "config.path.firefox.description": "Firefox 书签文件位置"
 }

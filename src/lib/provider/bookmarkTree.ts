@@ -9,7 +9,12 @@ export class BookmarkItem extends vscode.TreeItem {
     url: string;
     readonly type = 'url';
     browser: BrowserType;
-    constructor(label: string, collapsible: vscode.TreeItemCollapsibleState, url: string, browser: 'chrome' | 'edge') {
+    constructor(
+        label: string,
+        collapsible: vscode.TreeItemCollapsibleState,
+        url: string,
+        browser: 'chrome' | 'edge' | 'firefox',
+    ) {
         super(label || url, collapsible);
         this.url = url;
         // const faviconUrl = `chrome://favicon/http://${new URL(url).hostname}`;
@@ -70,12 +75,14 @@ export class BookmarkTree implements vscode.TreeDataProvider<AllBookmarkTreeItem
     refresh() {
         this._onDidChangeTreeData.fire();
     }
-    getChildren(element?: AllBookmarkTreeItem | undefined): vscode.ProviderResult<AllBookmarkTreeItem[]> {
+    async getChildren(element?: AllBookmarkTreeItem | undefined): Promise<AllBookmarkTreeItem[]> {
         if (!element) {
-            return browsers.map((browser: BrowserType) => {
-                let list: BookmarkData = this.pluginService.getBookmarkTree(browser);
-                return new BrowserFolder(browser, vscode.TreeItemCollapsibleState.Expanded, list);
-            });
+            return Promise.all(
+                browsers.map(async (browser: BrowserType) => {
+                    let list: BookmarkData = await this.pluginService.getBookmarkTree(browser);
+                    return new BrowserFolder(browser, vscode.TreeItemCollapsibleState.Expanded, list);
+                }),
+            );
         }
 
         if (element.type === 'browser') {

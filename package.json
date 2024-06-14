@@ -184,53 +184,11 @@
           "default": "",
           "description": "%config.path.edge.description%"
         },
-        "browser-bookmark.path.win.chrome": {
+        "browser-bookmark.path.firefox": {
           "scope": "machine",
           "type": "string",
           "default": "",
-          "description": "DEPRECATED",
-          "deprecationMessage": "DEPRECATED",
-          "markdownDeprecationMessage": "DEPRECATED"
-        },
-        "browser-bookmark.path.mac.chrome": {
-          "scope": "machine",
-          "type": "string",
-          "default": "",
-          "description": "DEPRECATED",
-          "deprecationMessage": "DEPRECATED",
-          "markdownDeprecationMessage": "DEPRECATED"
-        },
-        "browser-bookmark.path.linux.chrome": {
-          "scope": "machine",
-          "type": "string",
-          "default": "",
-          "description": "DEPRECATED",
-          "deprecationMessage": "DEPRECATED",
-          "markdownDeprecationMessage": "DEPRECATED"
-        },
-        "browser-bookmark.path.win.edge": {
-          "scope": "machine",
-          "type": "string",
-          "default": "",
-          "description": "DEPRECATED",
-          "deprecationMessage": "DEPRECATED",
-          "markdownDeprecationMessage": "DEPRECATED"
-        },
-        "browser-bookmark.path.mac.edge": {
-          "scope": "machine",
-          "type": "string",
-          "default": "",
-          "description": "DEPRECATED",
-          "deprecationMessage": "DEPRECATED",
-          "markdownDeprecationMessage": "DEPRECATED"
-        },
-        "browser-bookmark.path.linux.edge": {
-          "scope": "machine",
-          "type": "string",
-          "default": "",
-          "description": "DEPRECATED",
-          "deprecationMessage": "DEPRECATED",
-          "markdownDeprecationMessage": "DEPRECATED"
+          "description": "%config.path.firefox.description%"
         }
       }
     }
@@ -256,6 +214,7 @@
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
     "@vscode/test-electron": "^2.3.2",
+    "copy-webpack-plugin": "^12.0.2",
     "eslint": "^8.41.0",
     "glob": "^8.1.0",
     "mocha": "^10.2.0",

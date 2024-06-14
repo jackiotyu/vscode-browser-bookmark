@@ -11,7 +11,7 @@ export abstract class ChromiumBrowserPlugin implements IBrowserPlugin {
     abstract defaultPath: string;
     abstract get configPath(): string;
     abstract getBookmarkLocation(): string;
-    public getBookmarkTree(): BookmarkData {
+    public async getBookmarkTree(): Promise<BookmarkData> {
         try {
             const location = this.getBookmarkLocation();
             let data = fs.readFileSync(location, 'utf8');
@@ -22,7 +22,7 @@ export abstract class ChromiumBrowserPlugin implements IBrowserPlugin {
             return [];
         }
     }
-    public getBookmarks(): Array<Bookmark> {
+    public async getBookmarks(): Promise<Array<Bookmark>> {
         try {
             const location = this.getBookmarkLocation();
             let data = fs.readFileSync(location, 'utf8');

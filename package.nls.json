@@ -12,5 +12,6 @@
     "config.defaultOpenWith.enumDescriptions.external": "Open in external browser",
     "config.internalBrowserOpenCommand.description": "Configure command for open internal browser, default is \"simpleBrowser.api.open\". Make sure it works!",
     "config.path.chrome.description": "Chrome's bookmark file path",
-    "config.path.edge.description": "Microsoft Edge's bookmark file path"
+    "config.path.edge.description": "Microsoft Edge's bookmark file path",
+    "config.path.firefox.description": "Firefox's bookmark file path"
 }

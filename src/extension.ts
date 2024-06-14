@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { BookmarkTree, BookmarkItem, BrowserFolder, refreshBookmarkEvent } from '@/lib/provider/bookmarkTree';
 import { Commands, APP_NAME, PathConfig, browsers } from '@/constants';
-import { checkUseExternal, openInternal, openExternal, openSetting, platform, adaptPathSetting } from '@/lib/utils';
+import { checkUseExternal, openInternal, openExternal, openSetting, platform } from '@/lib/utils';
 import { pickBookmark } from '@/lib/quickPick';
 import { pluginService } from '@/lib/plugin';
 import path from 'path';
@@ -13,9 +13,6 @@ export function activate(context: vscode.ExtensionContext) {
         if (checkUseExternal()) openExternal(url);
         else openInternal(url);
     };
-
-    // FIXME 兼容旧数据
-    adaptPathSetting();
 
     const bookmarkTreeView = vscode.window.createTreeView(BookmarkTree.id, {
         treeDataProvider: bookmarkTree,
@@ -37,9 +34,8 @@ export function activate(context: vscode.ExtensionContext) {
             refreshBookmarkEvent.fire();
         }),
         vscode.commands.registerCommand(Commands.search, async () => {
-            const item = await pickBookmark([
-                ...browsers.map((browser) => pluginService.getBookmarks(browser)).flat(1),
-            ]);
+            const browserBookmarks = await Promise.all(browsers.map((browser) => pluginService.getBookmarks(browser)));
+            const item = await pickBookmark([...browserBookmarks.flat(1)]);
             if (!item) {
                 return;
             }
