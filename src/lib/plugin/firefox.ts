@@ -45,87 +45,95 @@ export class FirefoxPlugin implements IBrowserPlugin {
     }
 
     async getBookmarks(): Promise<Array<Bookmark>> {
-        const fileBuffer = fs.readFileSync(this.getBookmarkLocation());
-        const db = new (await this.SQL).Database(fileBuffer);
+        try {
+            const fileBuffer = fs.readFileSync(this.getBookmarkLocation());
+            const db = new (await this.SQL).Database(fileBuffer);
 
-        // 查询书签，按 Firefox 中存储的顺序（position）返回
-        const res = db.exec(`SELECT moz_bookmarks.id, moz_bookmarks.title, moz_places.url
-                             FROM moz_bookmarks
-                             LEFT JOIN moz_places ON moz_bookmarks.fk = moz_places.id
-                             WHERE moz_bookmarks.type = 1
-                             ORDER BY moz_bookmarks.position`);
+            // 查询书签，按 Firefox 中存储的顺序（position）返回
+            const res = db.exec(`SELECT moz_bookmarks.id, moz_bookmarks.title, moz_places.url
+                                 FROM moz_bookmarks
+                                 LEFT JOIN moz_places ON moz_bookmarks.fk = moz_places.id
+                                 WHERE moz_bookmarks.type = 1
+                                 ORDER BY moz_bookmarks.position`);
 
-        const bookmarks = res[0].values.map((row) => ({
-            name: row[1] as string,
-            value: row[2] as string,
-            type: 'firefox' as BrowserType,
-        }));
+            const bookmarks = res[0].values.map((row) => ({
+                name: row[1] as string,
+                value: row[2] as string,
+                type: 'firefox' as BrowserType,
+            }));
 
-        db.close();
+            db.close();
 
-        return bookmarks;
+            return bookmarks;
+        } catch {
+            return [];
+        }
     }
 
     async getBookmarkTree(): Promise<BookmarkData> {
-        const fileBuffer = fs.readFileSync(this.getBookmarkLocation());
-        const db = new (await this.SQL).Database(fileBuffer);
+        try {
+            const fileBuffer = fs.readFileSync(this.getBookmarkLocation());
+            const db = new (await this.SQL).Database(fileBuffer);
 
-        // 查询书签树，按 Firefox 中存储的顺序（position）返回
-        const treeRes = db.exec(`SELECT moz_bookmarks.id, moz_bookmarks.title, moz_places.url, moz_bookmarks.parent
-                                 FROM moz_bookmarks
-                                 LEFT JOIN moz_places ON moz_bookmarks.fk = moz_places.id
-                                 ORDER BY moz_bookmarks.position`);
+            // 查询书签树，按 Firefox 中存储的顺序（position）返回
+            const treeRes = db.exec(`SELECT moz_bookmarks.id, moz_bookmarks.title, moz_places.url, moz_bookmarks.parent
+                                     FROM moz_bookmarks
+                                     LEFT JOIN moz_places ON moz_bookmarks.fk = moz_places.id
+                                     ORDER BY moz_bookmarks.position`);
 
-        const bookmarks = treeRes[0].values;
-        const bookmarkMap = new Map<number, (IBookmarkFolder | IBookmarkUrl) & { parent?: number }>();
+            const bookmarks = treeRes[0].values;
+            const bookmarkMap = new Map<number, (IBookmarkFolder | IBookmarkUrl) & { parent?: number }>();
 
-        bookmarks.forEach((row) => {
-            const [id, title, url, parent] = row;
-            // 跳过根节点
-            if (parent === 0) return;
-            if (url) {
-                bookmarkMap.set(id as number, {
-                    name: title as string,
-                    url: url as string,
-                    type: 'url',
-                    parent: parent as number,
-                });
-            } else {
-                bookmarkMap.set(id as number, {
-                    name: title as string,
-                    url: '',
-                    type: 'folder',
-                    children: [],
-                    parent: parent as number,
-                });
-            }
-        });
-
-        const bookmarkTree: BookmarkData = [];
-
-        bookmarks.forEach((row) => {
-            const [id, , , parent] = row;
-            const bookmark = bookmarkMap.get(id as number);
-            if (bookmark && bookmark.type === 'folder') {
-                const parentBookmark = bookmarkMap.get(parent as number);
-                if (parentBookmark && parentBookmark.type === 'folder') {
-                    parentBookmark.children.push(bookmark);
+            bookmarks.forEach((row) => {
+                const [id, title, url, parent] = row;
+                // 跳过根节点
+                if (parent === 0) return;
+                if (url) {
+                    bookmarkMap.set(id as number, {
+                        name: title as string,
+                        url: url as string,
+                        type: 'url',
+                        parent: parent as number,
+                    });
                 } else {
-                    bookmarkTree.push(bookmark);
+                    bookmarkMap.set(id as number, {
+                        name: title as string,
+                        url: '',
+                        type: 'folder',
+                        children: [],
+                        parent: parent as number,
+                    });
                 }
-            } else if (bookmark && bookmark.type === 'url') {
-                const parentBookmark = bookmarkMap.get(parent as number);
-                if (parentBookmark && parentBookmark.type === 'folder') {
-                    parentBookmark.children.push(bookmark);
-                } else {
-                    bookmarkTree.push(bookmark);
+            });
+
+            const bookmarkTree: BookmarkData = [];
+
+            bookmarks.forEach((row) => {
+                const [id, , , parent] = row;
+                const bookmark = bookmarkMap.get(id as number);
+                if (bookmark && bookmark.type === 'folder') {
+                    const parentBookmark = bookmarkMap.get(parent as number);
+                    if (parentBookmark && parentBookmark.type === 'folder') {
+                        parentBookmark.children.push(bookmark);
+                    } else {
+                        bookmarkTree.push(bookmark);
+                    }
+                } else if (bookmark && bookmark.type === 'url') {
+                    const parentBookmark = bookmarkMap.get(parent as number);
+                    if (parentBookmark && parentBookmark.type === 'folder') {
+                        parentBookmark.children.push(bookmark);
+                    } else {
+                        bookmarkTree.push(bookmark);
+                    }
                 }
-            }
-        });
+            });
 
-        db.close();
+            db.close();
 
-        return bookmarkTree;
+            return bookmarkTree;
+        } catch {
+            return [];
+        }
     }
 
     getBookmarkLocation(): string {
