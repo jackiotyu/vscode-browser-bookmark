@@ -1,3 +1,11 @@
+## [0.1.5] - 2024-06-14
+
+### Added
+
+- Support Firefox bookmark.
+- Add configuration
+    - `browser-bookmark.path.firefox`
+
 ## [0.1.3] - 2023-11-01
 
 ### Change
